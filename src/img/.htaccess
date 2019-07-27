@@ -1,0 +1,15 @@
+
+Options +FollowSymLinks
+
+   RewriteEngine on
+
+
+   RewriteCond %{REQUEST_FILENAME} !-f
+
+   RewriteCond %{REQUEST_FILENAME} !-d
+
+   RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
