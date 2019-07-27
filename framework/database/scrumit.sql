@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 09:51 AM
+-- Generation Time: Jul 27, 2019 at 02:59 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -49,7 +49,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`project_id`, `projectName`) VALUES
-('0b8c5161-86cb-11e9-832e-c85b76dc7a47', 'Scrum_it');
+('a76c6aff-afe7-11e9-bbb3-c85b76dc7a47', 'Scrum.it');
 
 -- --------------------------------------------------------
 
@@ -68,8 +68,8 @@ CREATE TABLE `sprints` (
 --
 
 INSERT INTO `sprints` (`sprint_id`, `project`, `sprintName`) VALUES
-('375263b2-9f35-11e9-9709-c85b76dc7a47', '0b8c5161-86cb-11e9-832e-c85b76dc7a47', 'Scrum.it_v1'),
-('42320df7-896d-11e9-832e-c85b76dc7a47', '0b8c5161-86cb-11e9-832e-c85b76dc7a47', 'Backlog');
+('a76cf979-afe7-11e9-bbb3-c85b76dc7a47', 'a76c6aff-afe7-11e9-bbb3-c85b76dc7a47', 'Backlog'),
+('da28c0d2-b05e-11e9-bbb3-c85b76dc7a47', 'a76c6aff-afe7-11e9-bbb3-c85b76dc7a47', 'Scrum.it_v11');
 
 -- --------------------------------------------------------
 
@@ -118,10 +118,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `task_id`, `sprint`, `user`, `taskName`, `description`, `type`, `value`, `priority`, `status`, `complete`) VALUES
-(1, '2806ba4a-896e-11e9-832e-c85b76dc7a47', '42320df7-896d-11e9-832e-c85b76dc7a47', NULL, 'Add sessions', 'Session are not implemented in scrum.it web application', 'afa5d61a-893e-11e9-832e-c85b76dc7a47', 12, 1, '8f07b6c7-893e-11e9-832e-c85b76dc7a47', 10),
-(2, '50179911-896e-11e9-832e-c85b76dc7a47', '42320df7-896d-11e9-832e-c85b76dc7a47', NULL, 'Add Log in', 'Log in is not implemented.\r\nAdd admin profile.\r\nAdd admin page', 'b849c6fc-893e-11e9-832e-c85b76dc7a47', 30, 0, '97f36b51-893e-11e9-832e-c85b76dc7a47', 10),
-(3, '9b48c6c0-9f35-11e9-9709-c85b76dc7a47', '375263b2-9f35-11e9-9709-c85b76dc7a47', NULL, 'Create MVC framework', 'Create MVC framework from scratch with PHP', 'b849c6fc-893e-11e9-832e-c85b76dc7a47', 100, 1, '70beaa19-893e-11e9-832e-c85b76dc7a47', 70),
-(4, 'f23412a3-9f36-11e9-9709-c85b76dc7a47', '42320df7-896d-11e9-832e-c85b76dc7a47', NULL, 'Add Icons', '', 'b849c6fc-893e-11e9-832e-c85b76dc7a47', 0, 0, '8f07b6c7-893e-11e9-832e-c85b76dc7a47', NULL);
+(29, 'a050f0e7-b05e-11e9-bbb3-c85b76dc7a47', 'a76cf979-afe7-11e9-bbb3-c85b76dc7a47', '6fbbbfbe-b05d-11e9-bbb3-c85b76dc7a47', 'add task form', 'add it', 'd813f711-893e-11e9-832e-c85b76dc7a47', 1, 1, '70beaa19-893e-11e9-832e-c85b76dc7a47', 1),
+(31, 'ab4112a6-b061-11e9-bbb3-c85b76dc7a47', 'a76cf979-afe7-11e9-bbb3-c85b76dc7a47', '6fbbbfbe-b05d-11e9-bbb3-c85b76dc7a47', 'feature task', 'asd', 'b849c6fc-893e-11e9-832e-c85b76dc7a47', 1, 1, '70beaa19-893e-11e9-832e-c85b76dc7a47', 1),
+(32, 'c40f0e2b-b061-11e9-bbb3-c85b76dc7a47', 'a76cf979-afe7-11e9-bbb3-c85b76dc7a47', '6fbbbfbe-b05d-11e9-bbb3-c85b76dc7a47', 'story item', 'sorry story', 'c15c6bfb-893e-11e9-832e-c85b76dc7a47', 1, 1, '70beaa19-893e-11e9-832e-c85b76dc7a47', 1),
+(30, 'e7fd3268-b05e-11e9-bbb3-c85b76dc7a47', 'da28c0d2-b05e-11e9-bbb3-c85b76dc7a47', '6fbbbfbe-b05d-11e9-bbb3-c85b76dc7a47', 'test 3', 'тест', 'afa5d61a-893e-11e9-832e-c85b76dc7a47', 1, 1, '70beaa19-893e-11e9-832e-c85b76dc7a47', 1);
 
 -- --------------------------------------------------------
 
@@ -152,11 +152,18 @@ INSERT INTO `type` (`type_id`, `type`) VALUES
 
 CREATE TABLE `users` (
   `user_id` varchar(255) NOT NULL,
+  `project` varchar(255) NOT NULL,
   `user` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `position` varchar(255) NOT NULL
+  `position` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `project`, `user`, `email`, `position`) VALUES
+('6fbbbfbe-b05d-11e9-bbb3-c85b76dc7a47', 'a76c6aff-afe7-11e9-bbb3-c85b76dc7a47', 'nia mietva', 'mitevania@gmail.com', 'Owner');
 
 --
 -- Indexes for dumped tables
@@ -202,10 +209,10 @@ ALTER TABLE `tasks`
   ADD UNIQUE KEY `taskName` (`taskName`),
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `task_id` (`task_id`),
-  ADD KEY `fk_type_id` (`type`),
+  ADD KEY `fk_sprint_id` (`sprint`),
   ADD KEY `fk_status_id` (`status`),
-  ADD KEY `fk_user_id` (`user`),
-  ADD KEY `fk_sprint_id` (`sprint`);
+  ADD KEY `fk_type_id` (`type`),
+  ADD KEY `fk_user_id` (`user`);
 
 --
 -- Indexes for table `type`
@@ -223,8 +230,7 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `user` (`user`),
   ADD UNIQUE KEY `user_id` (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `password` (`password`),
-  ADD KEY `fk_pos_id` (`position`);
+  ADD UNIQUE KEY `project` (`project`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -240,7 +246,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
@@ -256,16 +262,16 @@ ALTER TABLE `sprints`
 -- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `fk_sprint_id` FOREIGN KEY (`sprint`) REFERENCES `sprints` (`sprint_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_status_id` FOREIGN KEY (`status`) REFERENCES `status` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_type_id` FOREIGN KEY (`type`) REFERENCES `type` (`type_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_sprint_id` FOREIGN KEY (`sprint`) REFERENCES `sprints` (`sprint_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_status_id` FOREIGN KEY (`status`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_type_id` FOREIGN KEY (`type`) REFERENCES `type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_pos_id` FOREIGN KEY (`position`) REFERENCES `positions` (`position_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `project` FOREIGN KEY (`project`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
